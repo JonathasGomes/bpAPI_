@@ -17,6 +17,7 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
+
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(options =>
 {

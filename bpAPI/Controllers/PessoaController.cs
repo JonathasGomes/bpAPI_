@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace bpAPI.Controllers
 {
@@ -11,15 +12,19 @@ namespace bpAPI.Controllers
     {
 
         private readonly DataContext _context;
+        private readonly ILogger<PessoaController> _logger;
 
-        public PessoaController(DataContext context)
+        public PessoaController(DataContext context, ILogger<PessoaController> logger)
         {
+            _logger = logger;
             _context = context;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Pessoa>>> Get()
         {
+            _logger.LogInformation("Testando Pessoa GET");
+            _logger.LogInformation("contexto", _context);
             return Ok(await _context.Pessoas.ToListAsync());
         }
 
